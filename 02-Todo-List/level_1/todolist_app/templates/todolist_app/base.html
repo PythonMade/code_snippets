@@ -11,11 +11,12 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'todolist_app/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'todolist_app/css/colors.css' %}">
 
     <title>ToDoList App</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<body class="bg-gradient-blush">
+    <nav class="navbar navbar-expand-lg bg-light bg-opacity-75 navbar-light fixed-top">
         <a class="navbar-brand" href="{% url 'todolist-home' %}">
             <img src="/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             ToDoList App

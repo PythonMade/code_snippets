@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block content %}
-<section id="home-page" class="py-5 bg-light">
+<section id="home-page" class="py-5">
     <div class="container py-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="mb-3">Tasks</h1>
+                <h1 class="my-3">Tasks</h1>
                 <form method="post" action="">
                     {% csrf_token %}
                     <div class="input-group mb-3">
-                        <input type="text" name="title" class="form-control" placeholder="Enter a task" autofocus=True>
+                        <input type="text" name="title" class="form-control" placeholder="Enter a task" autofocus=True required=True>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit">Add New Task</button>
+                            <button class="btn btn-primary" type="submit">Add New Task</button>
                         </div>
                     </div>
                 </form>
