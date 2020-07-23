@@ -1,0 +1,39 @@
+{% extends 'todolist_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="archive-page" class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="my-3">Archive</h1>
+                <ul class="list-group list-group-flush">
+                    {% for archive in archives %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-content-middle">
+                                <p class="m-0">{{ archive.title }}</p>
+                                <div class="d-flex">
+                                    <form method="post" action="/deleteTask/{{ archive.id }}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="last_url" value="{{ request.path }}">
+                                        <button class="btn btn-sm btn-white" type="submit">
+                                            <img class="img-fluid" src="{% static 'todolist_app/images/delete.png' %}" alt="">
+                                        </button>
+                                    </form>
+                                    <form method="post" action="/unArchiveTask/{{ archive.id }}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-white ml-2" type="submit">
+                                            <img width="20" src="{% static 'todolist_app/images/return.png' %}" alt="">
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+    
+{% endblock content %}

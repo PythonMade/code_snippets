@@ -1,0 +1,30 @@
+{% extends 'todolist_app/base.html' %}
+
+{% block content %}
+<section id="home-page" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="mb-3">Tasks</h1>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter a task">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">Add New Task</button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="list-group list-group-flush">
+                    {% for task in tasks %}
+                        <li class="list-group-item">{{ task.title }}</li>
+                    {% endfor %}
+                    <!-- {% for object in object_list %}
+                        <li class="list-group-item">{{ object.title }}</li>
+                    {% endfor %} -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+    
+{% endblock content %}

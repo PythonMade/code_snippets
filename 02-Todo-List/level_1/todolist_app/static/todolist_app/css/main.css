@@ -1,0 +1,39 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+}
+.alert {
+    z-index: 9999;
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#home-page {
+    height: 100%;
+}
+#home-page .list-group-item p {
+    line-height: 2em;
+}
+#home-page .list-group-item button {
+    width: 32px;
+    /* display: none; */
+}
+#home-page .list-group-item:hover button {
+    display: block;
+}
+#archive-page {
+    height: 100%;
+}
+#archive-page .list-group-item p {
+    line-height: 2em;
+}
+#archive-page .list-group-item button {
+    width: 32px;
+    /* display: none; */
+}
+#archive-page .list-group-item:hover button {
+    display: block;
+}

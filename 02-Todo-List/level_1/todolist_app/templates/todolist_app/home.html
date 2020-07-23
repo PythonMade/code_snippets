@@ -1,0 +1,95 @@
+{% extends 'todolist_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="home-page" class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="mb-3">Tasks</h1>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" name="title" class="form-control" placeholder="Enter a task" autofocus=True>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">Add New Task</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-content-middle">
+                            <p class="m-0">Fake Task 1</p>
+                            <form method="post" action="/deleteTask/">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-white" type="submit">
+                                    <img class="img-fluid" src="{% static 'todolist_app/images/delete.png' %}" alt="">
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                </ul> -->
+                <div class="list-group list-group-flush">
+                    {% for task in tasks %}
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between align-content-middle">
+                                <p class="m-0"><a href="#" onclick="giveIdToModal({{ task.id }}, '{{ task.title }}')" data-toggle="modal" data-target="#taskModal">{{ task.title }}</a></p>
+                                <div class="d-flex">
+                                    <form method="post" action="/deleteTask/{{ task.id }}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="last_url" value="{{ request.path }}">
+                                        <button class="btn btn-sm btn-white" type="submit">
+                                            <img class="img-fluid" src="{% static 'todolist_app/images/delete.png' %}" alt="">
+                                        </button>
+                                    </form>
+                                    <form method="post" action="/archiveTask/{{ task.id }}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-white ml-2" type="submit">
+                                            <img width="20" src="{% static 'todolist_app/images/check.png' %}" alt="">
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Pass Task ID to UpdateModal -->
+<script type="text/javascript">
+    function giveIdToModal(taskId, taskTitle){
+        document.getElementById("update-form").action = "/updateTask/" + taskId;
+        document.getElementById("update-textbox").value = taskTitle;
+    }
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="taskModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="update-form" method="post" action="">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input id="update-textbox" type="text" name="title" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update and Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
